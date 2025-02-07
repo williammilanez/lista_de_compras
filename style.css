@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-family: "Inter", sans-serif;
+    font-size: 62.5%;
+
+    --bg-primary-color: #F4F5FB;
+    --bg-secondary-color: #FFFFFF;
+
+    --color-brand: #CA3884;
+    --color-brand-hover: #A52C6B;
+    --color-danger: #C93847;
+
+    --content-primary-color: #080B12;
+    --content-secondary-color: #374151;
+    --content-tertiary-color: #9CA3AF;
+
+    --always-white: #FFFFFF;
+
+    --border-primary-color: #D1D5DB;
+    --border-hover-color: #B9C2D0;
+
+    background-color: var(--bg-primary-color);
+}
+  
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+::-webkit-scrollbar-track {
+    background-color: #1f2151;
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: #2f3279;
+}
+
+#app {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2.5rem;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+    /* header */
+/* logotipo */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 2.5rem auto 6.2rem;
+}
+
+/* botao de voltar ao menu principal */
+.back-link {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    color: var(--color-brand);
+}
+
+/* título */
+.title {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    font-weight: 700;
+
+    margin: 1.6rem auto 4.4rem 0;
+}
+
+/* campo de busca de novo item*/
+.search {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+
+    flex-wrap: nowrap;
+
+    margin-bottom: 4.0rem;
+}
+
+.text-field {
+    width: 100%;
+    height: 4.4rem;
+    padding: 1.1rem 1.8rem;
+
+    white-space: nowrap;
+
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-primary-color);
+    color: var(--content-tertiary-color);
+
+    background-color: var(--bg-secondary-color);
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.text-field:hover {
+    border-color: var(--border-hover-color);
+    color: var(--content-secondary-color);
+}
+
+.text-field:focus {
+    border: 1px solid var(--color-brand);
+    color: var(--content-primary-color);
+    outline: none; /* remove a borda azul padrão do navegador */
+}
+
+/* botão de adição para novo item */
+button {
+    width: 16rem;
+    height: 4.4rem;
+
+    padding: 1.2rem 2.4rem;
+
+    white-space: nowrap;
+
+    border-radius: 1.2rem;
+    border: 1px solid var(--color-brand);
+    background-color: var(--color-brand);
+    color: var(--always-white);
+
+    transition: background-color 0.5s ease-in-out;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color-brand-hover);
+    color: var(--always-white);
+}
+
+    /* main */
+/* itens adicionados */
+.items {
+    gap: 1.2rem 0;
+}
+
+.preference, .message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    white-space: nowrap;
+
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-primary-color);
+    color: var(--content-tertiary-color);
+    
+    background-color: var(--bg-secondary-color);
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    margin: 1.2rem 0;
+}
+
+.preference:hover {
+    border-color: var(--border-hover-color);
+    color: var(--content-secondary-color);
+}
+
+.preference input[type="checkbox"] {
+    appearance: none; /* remove o estilo padrão */
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: 0.8rem 1.2rem;
+
+    border: 2px solid var(--border-primary-color);
+    border-radius: 0.6rem;
+    background-color: var(--bg-secondary-color);
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.preference input[type="checkbox"]:hover {
+    border-color: var(--border-hover-color);
+}
+
+.preference input[type="checkbox"]:checked {
+    background-color: var(--color-brand);
+    border-color: var(--color-brand);
+    position: relative;
+}
+
+.preference input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 1rem;
+    color: var(--always-white);
+    display: none;
+}
+
+.preference input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+.preference label, .message {
+    font-size: 1.6rem;
+    line-height: 2.0rem;
+    font-weight: 600;
+
+    flex-grow: 1; /* faz o texto ocupar o espaço restante */
+
+    padding: 0.8rem 0;
+    color: var(--content-secondary-color);
+
+    cursor: pointer;
+}
+
+.preference svg {
+    margin: 0.8rem 1.2rem;
+    cursor: pointer;
+}
+
+.preference:has(input[type="checkbox"]:checked) {
+    border: 1px solid var(--color-brand);
+    color: var(--content-primary-color);
+}
+
+    /* footer */
+/* messagem que aparece ao excluir um item */
+.message {
+    color: var(--always-white);
+    background-color: var(--color-danger);
+
+    border: 1px solid var(--color-danger);
+
+    padding: 0 1.2rem;
+    height: 4.4rem;
+}
+
+p {
+    font-size: 1.6rem;
+    line-height: 2.0rem;
+    font-weight: 500;
+}
