@@ -245,10 +245,55 @@ button:hover {
 
     padding: 0 1.2rem;
     height: 4.4rem;
+
+    transition: background-color 0.5s ease-in-out;
 }
 
-p {
+.message:hover {
+    background-color: #b41f2e;
+
+    border: 1px solid  #b41f2e;
+}
+
+.message p {
     font-size: 1.6rem;
     line-height: 2.0rem;
     font-weight: 500;
+
+    flex-grow: 1; /* faz o texto ocupar o espaço restante */
+
+    padding: 0.8rem;
+}
+
+.message svg path {
+    fill: var(--always-white); /* deixar a cor do svg branco */
+}
+
+    /* versão mobile para 390px ou menos */
+@media (max-width: 390px) {
+    .logo {
+        display: none; /* esconde a logo no header */
+    }
+
+    .back-link {
+        margin-top: 7.8rem;
+    }
+
+    .search {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search input {
+        width: 100%;
+    }
+
+    .search button {
+        width: 100%;
+    }
+
+    .message {
+        margin-top: 3.6rem;
+    }
 }
