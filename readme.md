@@ -5,7 +5,7 @@ Este projeto é uma aplicação interativa para gerenciar uma lista de compras.<
 O usuário pode adicionar, marcar como concluído e remover itens, com uma interface intuitiva e responsiva.
 
 <div align="center">
-  <img alt="Capa do Projeto" src="./images/project_cover.png" width="75%">
+  <img alt="Capa do Projeto" src="./images/project-cover.png" width="75%">
 </div>
 
 ## Funcionalidades do projeto 📋
