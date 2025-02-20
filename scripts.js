@@ -121,9 +121,9 @@ function deleteEvent(selected_element) {
         removed_item.remove();
 
         // faz a mensagem sumir automaticamente após 5 segundos
-        setTimeout(() => {
-            warning_box.classList.add("hidden");
-        }, 5000);
+        // setTimeout(() => {
+        //     warning_box.classList.add("hidden");
+        // }, 5000);
 
         // fecha a mensagem de aviso quando clicado no "X"
         close_icon.addEventListener("click", () => {
@@ -131,3 +131,19 @@ function deleteEvent(selected_element) {
         });
     });
 }
+
+// altera o texto de mensagem removida para versão mobile
+function updateWarningMessage() {
+    const warningMessage = document.querySelector("#warning-wrapper p");
+    if (window.matchMedia("(max-width: 390px)").matches) {
+        warningMessage.innerHTML = `<strong>&nbsp;<span class="removed"></span>&nbsp;</strong> removido!`;
+    } else {
+        warningMessage.innerHTML = `O item<strong>&nbsp;<span class="removed"></span>&nbsp;</strong> foi removido da sua lista!`;
+    }
+}
+
+// chama a função ao carregar a página
+document.addEventListener("DOMContentLoaded", updateWarningMessage);
+
+// chama a função quando a tela for redimensionada (para garantir adaptação dinâmica)
+window.addEventListener("resize", updateWarningMessage);

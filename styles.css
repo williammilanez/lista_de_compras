@@ -119,8 +119,6 @@ body {
     justify-content: center;
     gap: 1.6rem;
 
-    flex-wrap: nowrap;
-
     margin-bottom: 4.0rem;
 }
 
@@ -342,5 +340,15 @@ button:hover {
 
     .add-item button {
         width: 100%;
+    }
+
+    #add-item-form input,
+    #items-list span,
+    #warning p {
+        font-size: 1.2rem;
+        line-height: 1.6rem; /* ajusta a altura da linha para melhor legibilidade */
+        text-align: center; /* centraliza o texto */
+        word-wrap: break-word; /* quebra o texto corretamente */
+        white-space: normal; /* permite a quebra de linha */
     }
 }
