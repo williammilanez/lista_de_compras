@@ -46,33 +46,57 @@ form.onsubmit = (event) => {
 
 // inserir novo item no topo da lista
 function addItem(name) {
-    // <li class="item"></li>
-    const new_item = document.createElement("li")
-    new_item.classList.add("item")
-    
-    // <input type="checkbox">
-    const new_checkbox = document.createElement("input")
-    new_checkbox.setAttribute("type", "checkbox")
-    new_item.append(new_checkbox)
+    // criar <li class="item">
+    const new_item = document.createElement("li");
+    new_item.classList.add("item");
 
-    // <span> user_input.value </span>
-    const new_name = document.createElement("span")
-    new_name.textContent = name
-    new_item.append(new_name)
+    // criar <input type="checkbox">
+    const new_checkbox = document.createElement("input");
+    new_checkbox.setAttribute("type", "checkbox");
+    new_item.append(new_checkbox);
 
-    // <img>
-    const new_remove_img = document.createElement("img")
-    new_remove_img.classList.add("trash-bin")
-    new_remove_img.setAttribute("src", "./assets/trash-bin.svg")
-    new_remove_img.setAttribute("alt", "Ícone de lata de lixo")
-    new_item.append(new_remove_img)
+    // criar <span> user_input.value </span>
+    const new_name = document.createElement("span");
+    new_name.textContent = name;
+    new_item.append(new_name);
 
-    // tornar o ícone da lixeira do novo item capaz de chamar a função deleteEvent() quando clicado
-    deleteEvent(new_remove_img)
-    
-    // insira o novo <li class="item"> na <ul role="list" id="items-list"> na primeira posição
-    items_list.prepend(new_item)
+    // criar <img> (inicialmente escondida)
+    const new_remove_img = document.createElement("img");
+    new_remove_img.classList.add("trash-bin");
+    new_remove_img.setAttribute("src", "./assets/trash-bin.svg");
+    new_remove_img.setAttribute("alt", "Ícone de lata de lixo");
+    new_remove_img.style.display = "none"; // esconder a lixeira inicialmente
+    new_item.append(new_remove_img);
+
+    // tornar o ícone da lixeira do novo item capaz de chamar a função deleteEvent()
+    deleteEvent(new_remove_img);
+
+    // adicionar evento para exibir/ocultar a lixeira ao marcar o checkbox
+    new_checkbox.addEventListener("change", () => {
+        new_remove_img.style.display = new_checkbox.checked ? "inline-block" : "none";
+    });
+
+    // inserir o novo <li class="item"> na lista
+    items_list.prepend(new_item);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    // seleciona todos os itens já cadastrados
+    const existing_items = document.querySelectorAll("li.item");
+
+    existing_items.forEach((item) => {
+        const checkbox = item.querySelector("input[type='checkbox']");
+        const trash_icon = item.querySelector("img.trash-bin");
+
+        // esconde a lixeira no início
+        trash_icon.style.display = "none";
+
+        // adiciona evento ao checkbox
+        checkbox.addEventListener("change", () => {
+            trash_icon.style.display = checkbox.checked ? "inline-block" : "none";
+        });
+    });
+});
 
 // tornar o ícone da lixeira do item de exemplo pré-fabricado capaz de chamar a função deleteEvent()
 all_remove_icons.forEach((selected_element) => {
