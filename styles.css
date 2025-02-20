@@ -51,6 +51,23 @@ body {
 }
 
     /* header */
+/* ícones do canto superior direito da tela */
+.icons {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 2rem;
+}
+
+.icons img {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+    
+.icons img:hover {
+    transform: scale(1.1);
+}
+
 /* logotipo */
 .logo {
     display: flex;
@@ -58,6 +75,13 @@ body {
     justify-content: center;
 
     margin: 2.5rem auto 6.2rem;
+    
+    transition: transform 0.2s ease-in-out;
+}
+ 
+.logo:hover {
+    transform: scale(1.1);
+    filter: brightness(1.75);
 }
 
 /* botao de voltar ao menu principal */
@@ -66,11 +90,18 @@ body {
     line-height: 1.6rem;
     font-weight: 500;
 
-    text-decoration: none;
-
-    display: flex;
+    display: inline; /* faz com que o link ocupe apenas o espaço do texto */
     align-items: center;
     color: var(--color-brand);
+
+    transition: transform 0.2s ease-in-out;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+    
+.back-link:hover {
+    font-weight: 700;
 }
 
 /* título */
@@ -83,7 +114,7 @@ body {
 }
 
 /* campo de busca de novo item*/
-.search {
+.add-item {
     display: flex;
     justify-content: center;
     gap: 1.6rem;
@@ -93,10 +124,12 @@ body {
     margin-bottom: 4.0rem;
 }
 
-.text-field {
+#new-item {
     width: 100%;
     height: 4.4rem;
     padding: 1.1rem 1.8rem;
+
+    font-size: 1.6rem;
 
     white-space: nowrap;
 
@@ -108,12 +141,12 @@ body {
     transition: border 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.text-field:hover {
+#new-item:hover {
     border-color: var(--border-hover-color);
     color: var(--content-secondary-color);
 }
 
-.text-field:focus {
+#new-item:focus {
     border: 1px solid var(--color-brand);
     color: var(--content-primary-color);
     outline: none; /* remove a borda azul padrão do navegador */
@@ -143,13 +176,13 @@ button:hover {
     color: var(--always-white);
 }
 
-    /* main */
+    /* main */    
 /* itens adicionados */
 .items {
     gap: 1.2rem 0;
 }
 
-.preference, .message {
+.item, #warning {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -168,12 +201,12 @@ button:hover {
     margin: 1.2rem 0;
 }
 
-.preference:hover {
+.item:hover {
     border-color: var(--border-hover-color);
     color: var(--content-secondary-color);
 }
 
-.preference input[type="checkbox"] {
+.item input[type="checkbox"] {
     appearance: none; /* remove o estilo padrão */
     width: 1.6rem;
     height: 1.6rem;
@@ -191,53 +224,60 @@ button:hover {
     transition: all 0.2s ease-in-out;
 }
 
-.preference input[type="checkbox"]:hover {
+.item input[type="checkbox"]:hover {
     border-color: var(--border-hover-color);
 }
 
-.preference input[type="checkbox"]:checked {
+.item input[type="checkbox"]:checked {
     background-color: var(--color-brand);
     border-color: var(--color-brand);
     position: relative;
 }
 
-.preference input[type="checkbox"]::after {
+.item input[type="checkbox"]::after {
     content: "✔";
     font-size: 1rem;
     color: var(--always-white);
     display: none;
 }
 
-.preference input[type="checkbox"]:checked::after {
+.item input[type="checkbox"]:checked::after {
     display: block;
 }
 
-.preference label, .message {
+.item span, #warning {
     font-size: 1.6rem;
     line-height: 2.0rem;
     font-weight: 600;
+
+    height: 5.0rem;
 
     flex-grow: 1; /* faz o texto ocupar o espaço restante */
 
     padding: 0.8rem 0;
     color: var(--content-secondary-color);
 
-    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
-.preference svg {
+.item .trash-bin {
     margin: 0.8rem 1.2rem;
     cursor: pointer;
 }
 
-.preference:has(input[type="checkbox"]:checked) {
+.item:has(input[type="checkbox"]:checked) {
     border: 1px solid var(--color-brand);
     color: var(--content-primary-color);
 }
 
     /* footer */
 /* messagem que aparece ao excluir um item */
-.message {
+.hidden {
+    display: none;
+}
+
+#warning {
     color: var(--always-white);
     background-color: var(--color-danger);
 
@@ -246,27 +286,38 @@ button:hover {
     padding: 0 1.2rem;
     height: 4.4rem;
 
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+
+    margin-top: 3.6rem;
 }
 
-.message:hover {
+#warning:hover {
     background-color: #b41f2e;
 
     border: 1px solid  #b41f2e;
 }
 
-.message p {
+#warning p {
     font-size: 1.6rem;
     line-height: 2.0rem;
     font-weight: 500;
 
+    height: 4.4rem;
+
     flex-grow: 1; /* faz o texto ocupar o espaço restante */
 
     padding: 0.8rem;
+
+    display: flex;
+    align-items: center;
 }
 
-.message svg path {
+#warning svg path {
     fill: var(--always-white); /* deixar a cor do svg branco */
+}
+
+#warning .exit {
+    cursor: pointer;
 }
 
     /* versão mobile para 390px ou menos */
@@ -275,25 +326,21 @@ button:hover {
         display: none; /* esconde a logo no header */
     }
 
-    .back-link {
-        margin-top: 7.8rem;
+    .icons {
+        margin-bottom: 5rem;
     }
 
-    .search {
+    .add-item {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .search input {
+    .add-item input {
         width: 100%;
     }
 
-    .search button {
+    .add-item button {
         width: 100%;
-    }
-
-    .message {
-        margin-top: 3.6rem;
     }
 }

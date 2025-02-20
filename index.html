@@ -1,132 +1,120 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-
     <title>Lista de compras</title>
 
-    <link rel="shortcut icon" href="./assets/logotipo.svg" type="logotipo">
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
     <div id="app">
         <header>
-            <img class="logo" src="./img/logo.png" alt="Logotipo">
+            <div class="icons">
+                <a href="">
+                    <img src="./assets/home.svg" alt="Ir para a página inicial">
+                </a>
+
+                <a href="">
+                    <img src="./assets/checklist.svg" alt="Ir para os itens da lista de compras">
+                </a>
+
+                <a href="">
+                    <img src="./assets/settings-cog.svg" alt="Ir para as configurações">
+                </a>
+            </div>
+
+            <a href="#">
+                <img class="logo" src="./images/logo.png" alt="Logomarca">
+            </a>
 
             <a href="#" class="back-link">⬅ Voltar</a>
 
             <h1 class="title">Compras da semana</h1>
 
-            <div class="search">
-                <input class="text-field" type="text" placeholder="Adicione um novo item">
-
-                <button type="submit">Adicionar item</button>
-            </div>
+            <form id="add-item-form">
+                <div class="add-item">
+                    <input id="new-item" type="text" name="new-item" placeholder="Adicione um novo item">
+                    <p class="hidden">* Campo obrigatório!</p>
+                    <button type="submit">Adicionar item</button>
+                </div>
+            </form>
         </header>
 
         <main>
-            <div>
-                <!--
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.16675 5H17.5001" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                    <path d="M9.16675 10H17.5001" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                    <path d="M9.16675 15H17.5001" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                    <path d="M2.5 6.16064C2.5 6.16064 3.33333 6.7038 3.75 7.49992C3.75 7.49992 5 4.37492 6.66667 3.33325" stroke="#080B12" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.5 15.3274C2.5 15.3274 3.33333 15.8706 3.75 16.6667C3.75 16.6667 5 13.5417 6.66667 12.5" stroke="#080B12" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <form>
+                <ul role="list" id="items-list">
+                    <li class="item">
+                        <input type="checkbox" name="sliced_bread" id="sliced_bread">
 
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.0002 14.1667H10.0077" stroke="#080B12" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16.6668 7.08325V11.2499C16.6668 14.3926 16.6668 15.964 15.6905 16.9403C14.7142 17.9166 13.1428 17.9166 10.0002 17.9166C6.85746 17.9166 5.28612 17.9166 4.3098 16.9403C3.3335 15.964 3.3335 14.3926 3.3335 11.2499V7.08325" stroke="#080B12" stroke-width="1.25"/>
-                    <path d="M18.3335 8.74992L14.7142 5.27949C12.492 3.14866 11.3809 2.08325 10.0001 2.08325C8.61939 2.08325 7.50832 3.14866 5.2861 5.27949L1.66681 8.74992" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                </svg>
+                        <span for="sliced_bread">Pão Fatiado</span>
 
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9165 9.99992C12.9165 11.6108 11.6107 12.9166 9.99986 12.9166C8.38902 12.9166 7.08319 11.6108 7.08319 9.99992C7.08319 8.38909 8.38902 7.08325 9.99986 7.08325C11.6107 7.08325 12.9165 8.38909 12.9165 9.99992Z" stroke="#080B12" stroke-width="1.25"/>
-                    <path d="M17.509 11.7471C17.9439 11.6298 18.1614 11.5712 18.2473 11.459C18.3332 11.3469 18.3332 11.1665 18.3332 10.8058V9.19435C18.3332 8.8336 18.3332 8.65318 18.2473 8.5411C18.1613 8.42893 17.9439 8.37026 17.509 8.253C15.8837 7.81467 14.8664 6.11544 15.2859 4.50074C15.4013 4.05667 15.4589 3.83465 15.4038 3.70442C15.3488 3.5742 15.1908 3.48446 14.8746 3.30498L13.4373 2.48896C13.1272 2.31284 12.9721 2.22478 12.8329 2.24353C12.6937 2.26228 12.5367 2.41896 12.2225 2.73229C11.0065 3.94541 8.9945 3.94536 7.77845 2.73221C7.46436 2.41887 7.30732 2.26221 7.16811 2.24345C7.02891 2.2247 6.87381 2.31276 6.56361 2.48887L5.12637 3.30491C4.81028 3.48437 4.65223 3.57411 4.59715 3.70431C4.54207 3.83451 4.59973 4.05657 4.71505 4.50068C5.13431 6.11543 4.11627 7.81471 2.49069 8.25301C2.05577 8.37026 1.83831 8.42893 1.7524 8.54101C1.6665 8.65318 1.6665 8.8336 1.6665 9.19435V10.8058C1.6665 11.1665 1.6665 11.3469 1.7524 11.459C1.8383 11.5712 2.05576 11.6298 2.49069 11.7471C4.116 12.1854 5.13324 13.8847 4.71377 15.4993C4.59841 15.9434 4.54073 16.1654 4.5958 16.2957C4.65089 16.4259 4.80894 16.5157 5.12505 16.6951L6.5623 17.5112C6.87251 17.6873 7.02762 17.7753 7.16684 17.7566C7.30605 17.7378 7.46307 17.5811 7.7771 17.2678C8.99375 16.0537 11.0072 16.0536 12.2239 17.2677C12.5379 17.5811 12.6949 17.7378 12.8342 17.7565C12.9733 17.7753 13.1285 17.6872 13.4387 17.5111L14.8759 16.695C15.1921 16.5156 15.3502 16.4258 15.4052 16.2956C15.4603 16.1653 15.4026 15.9433 15.2872 15.4993C14.8675 13.8847 15.8839 12.1855 17.509 11.7471Z" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                </svg>
-                -->
+                        <img class="trash-bin" src="assets/trash-bin.svg" alt="Ícone de lata de lixo">
+                    </li>
 
-                <form>
-                    <div class="items">
-                        <div class="preference">
-                            <input type="checkbox" name="items" id="sliced_bread" />
-                            <label for="sliced_bread">Pão de forma</label>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.25 4.58325L15.7336 12.9375C15.6016 15.0719 15.5357 16.1392 15.0007 16.9065C14.7361 17.2858 14.3956 17.606 14.0006 17.8466C13.2017 18.3333 12.1325 18.3333 9.99392 18.3333C7.8526 18.3333 6.78192 18.3333 5.98254 17.8457C5.58733 17.6047 5.24667 17.2839 4.98223 16.9039C4.4474 16.1354 4.38287 15.0667 4.25384 12.9293L3.75 4.58325" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M2.5 4.58342H17.5M13.3797 4.58342L12.8109 3.40986C12.433 2.6303 12.244 2.24051 11.9181 1.99742C11.8458 1.9435 11.7693 1.89553 11.6892 1.854C11.3283 1.66675 10.8951 1.66675 10.0287 1.66675C9.14067 1.66675 8.69667 1.66675 8.32973 1.86185C8.24842 1.90509 8.17082 1.955 8.09774 2.01106C7.76803 2.264 7.58386 2.66804 7.21551 3.47613L6.71077 4.58342" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M7.91687 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M12.0831 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        
-                        <div class="preference">
-                            <input type="checkbox" name="items" id="black_coffee" />
-                            <label for="black_coffee">Café preto</label>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.25 4.58325L15.7336 12.9375C15.6016 15.0719 15.5357 16.1392 15.0007 16.9065C14.7361 17.2858 14.3956 17.606 14.0006 17.8466C13.2017 18.3333 12.1325 18.3333 9.99392 18.3333C7.8526 18.3333 6.78192 18.3333 5.98254 17.8457C5.58733 17.6047 5.24667 17.2839 4.98223 16.9039C4.4474 16.1354 4.38287 15.0667 4.25384 12.9293L3.75 4.58325" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M2.5 4.58342H17.5M13.3797 4.58342L12.8109 3.40986C12.433 2.6303 12.244 2.24051 11.9181 1.99742C11.8458 1.9435 11.7693 1.89553 11.6892 1.854C11.3283 1.66675 10.8951 1.66675 10.0287 1.66675C9.14067 1.66675 8.69667 1.66675 8.32973 1.86185C8.24842 1.90509 8.17082 1.955 8.09774 2.01106C7.76803 2.264 7.58386 2.66804 7.21551 3.47613L6.71077 4.58342" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M7.91687 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M12.0831 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                            </svg>
-                        </div>
+                    <li class="item">
+                        <input type="checkbox" name="black_coffee" id="black_coffee">
 
-                        <div class="preference">
-                            <input type="checkbox" name="items" id="orange_juice" />
-                            <label for="orange_juice">Suco de laranja</label>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.25 4.58325L15.7336 12.9375C15.6016 15.0719 15.5357 16.1392 15.0007 16.9065C14.7361 17.2858 14.3956 17.606 14.0006 17.8466C13.2017 18.3333 12.1325 18.3333 9.99392 18.3333C7.8526 18.3333 6.78192 18.3333 5.98254 17.8457C5.58733 17.6047 5.24667 17.2839 4.98223 16.9039C4.4474 16.1354 4.38287 15.0667 4.25384 12.9293L3.75 4.58325" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M2.5 4.58342H17.5M13.3797 4.58342L12.8109 3.40986C12.433 2.6303 12.244 2.24051 11.9181 1.99742C11.8458 1.9435 11.7693 1.89553 11.6892 1.854C11.3283 1.66675 10.8951 1.66675 10.0287 1.66675C9.14067 1.66675 8.69667 1.66675 8.32973 1.86185C8.24842 1.90509 8.17082 1.955 8.09774 2.01106C7.76803 2.264 7.58386 2.66804 7.21551 3.47613L6.71077 4.58342" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M7.91687 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M12.0831 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                            </svg>
-                        </div>
+                        <span for="black_coffee">Café preto</span>
 
-                        <div class="preference">
-                            <input type="checkbox" name="items" id="cookie" />
-                            <label for="cookie">Bolacha</label>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.25 4.58325L15.7336 12.9375C15.6016 15.0719 15.5357 16.1392 15.0007 16.9065C14.7361 17.2858 14.3956 17.606 14.0006 17.8466C13.2017 18.3333 12.1325 18.3333 9.99392 18.3333C7.8526 18.3333 6.78192 18.3333 5.98254 17.8457C5.58733 17.6047 5.24667 17.2839 4.98223 16.9039C4.4474 16.1354 4.38287 15.0667 4.25384 12.9293L3.75 4.58325" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M2.5 4.58342H17.5M13.3797 4.58342L12.8109 3.40986C12.433 2.6303 12.244 2.24051 11.9181 1.99742C11.8458 1.9435 11.7693 1.89553 11.6892 1.854C11.3283 1.66675 10.8951 1.66675 10.0287 1.66675C9.14067 1.66675 8.69667 1.66675 8.32973 1.86185C8.24842 1.90509 8.17082 1.955 8.09774 2.01106C7.76803 2.264 7.58386 2.66804 7.21551 3.47613L6.71077 4.58342" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M7.91687 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                                <path d="M12.0831 13.75V8.75" stroke="#080B12" stroke-width="1.25" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                        <img class="trash-bin" src="assets/trash-bin.svg" alt="Ícone de lata de lixo">
+                    </li>
+
+                    <li class="item">
+                        <input type="checkbox" name="orange_juice" id="orange_juice">
+
+                        <span for="orange_juice">Suco de laranja</span>
+
+                        <img class="trash-bin" src="assets/trash-bin.svg" alt="Ícone de lata de lixo">
+                    </li>
+
+                    <li class="item">
+                        <input type="checkbox" name="cookie" id="cookie">
+
+                        <span for="cookie">Bolacha</span>
+
+                        <img class="trash-bin" src="assets/trash-bin.svg" alt="Ícone de lata de lixo">
+                    </li>
+                </ul>
+            </form>
         </main>
 
         <footer>
-            <div class="message">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_3114_663)">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.43998 0.672189C8.7639 0.731429 8.34938 0.792109 7.88278 0.900069C5.60786 1.42647 3.59126 2.81111 2.2759 4.74989C1.21062 6.32005 0.660522 8.10789 0.660522 9.99989C0.660522 11.9689 1.25678 13.8257 2.40742 15.4399C3.7175 17.2777 5.70576 18.6026 7.90998 19.1064C9.41086 19.4495 11.0523 19.4105 12.52 18.997C14.7279 18.3748 16.609 16.9818 17.8636 15.0399C18.2023 14.5156 18.4457 14.0382 18.6995 13.3999C19.3759 11.6994 19.522 9.72779 19.1065 7.90989C18.637 5.85567 17.4589 3.99197 15.8 2.67891C14.4018 1.57225 12.7721 0.906069 10.98 0.708689C10.706 0.678509 9.65264 0.653549 9.43998 0.672189ZM9.84388 5.30123C9.55192 5.35871 9.31072 5.61583 9.26092 5.92265C9.23486 6.08333 9.23304 10.2564 9.25898 10.4357C9.29482 10.6836 9.44756 10.8919 9.67586 11.0043C9.79826 11.0645 9.82472 11.0699 9.99998 11.0699C10.1752 11.0699 10.2017 11.0645 10.3241 11.0043C10.5524 10.8919 10.7051 10.6836 10.741 10.4357C10.7669 10.2564 10.7651 6.08333 10.739 5.92265C10.6878 5.60721 10.4486 5.35841 10.1401 5.29991C10.0196 5.27707 9.96536 5.27731 9.84388 5.30123ZM9.85954 12.5596C9.60484 12.592 9.38812 12.7084 9.19692 12.9155C8.9555 13.177 8.8655 13.5362 8.95078 13.898C9.01322 14.163 9.213 14.4276 9.4614 14.5745C9.59266 14.6521 9.8437 14.7199 9.99998 14.7199C10.1563 14.7199 10.4073 14.6521 10.5386 14.5745C10.787 14.4276 10.9867 14.163 11.0492 13.898C11.1345 13.5362 11.0445 13.177 10.803 12.9155C10.5499 12.6413 10.214 12.5146 9.85954 12.5596Z" fill="#080B12"/>
-                    </g>
-                    <defs>
-                    <clipPath id="clip0_3114_663">
-                    <rect width="20" height="20" fill="white"/>
-                    </clipPath>
-                    </defs>
-                </svg>
+            <div class="hidden" id="warning-wrapper">
+                <div id="warning">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_3114_663)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.43998 0.672189C8.7639 0.731429 8.34938 0.792109 7.88278 0.900069C5.60786 1.42647 3.59126 2.81111 2.2759 4.74989C1.21062 6.32005 0.660522 8.10789 0.660522 9.99989C0.660522 11.9689 1.25678 13.8257 2.40742 15.4399C3.7175 17.2777 5.70576 18.6026 7.90998 19.1064C9.41086 19.4495 11.0523 19.4105 12.52 18.997C14.7279 18.3748 16.609 16.9818 17.8636 15.0399C18.2023 14.5156 18.4457 14.0382 18.6995 13.3999C19.3759 11.6994 19.522 9.72779 19.1065 7.90989C18.637 5.85567 17.4589 3.99197 15.8 2.67891C14.4018 1.57225 12.7721 0.906069 10.98 0.708689C10.706 0.678509 9.65264 0.653549 9.43998 0.672189ZM9.84388 5.30123C9.55192 5.35871 9.31072 5.61583 9.26092 5.92265C9.23486 6.08333 9.23304 10.2564 9.25898 10.4357C9.29482 10.6836 9.44756 10.8919 9.67586 11.0043C9.79826 11.0645 9.82472 11.0699 9.99998 11.0699C10.1752 11.0699 10.2017 11.0645 10.3241 11.0043C10.5524 10.8919 10.7051 10.6836 10.741 10.4357C10.7669 10.2564 10.7651 6.08333 10.739 5.92265C10.6878 5.60721 10.4486 5.35841 10.1401 5.29991C10.0196 5.27707 9.96536 5.27731 9.84388 5.30123ZM9.85954 12.5596C9.60484 12.592 9.38812 12.7084 9.19692 12.9155C8.9555 13.177 8.8655 13.5362 8.95078 13.898C9.01322 14.163 9.213 14.4276 9.4614 14.5745C9.59266 14.6521 9.8437 14.7199 9.99998 14.7199C10.1563 14.7199 10.4073 14.6521 10.5386 14.5745C10.787 14.4276 10.9867 14.163 11.0492 13.898C11.1345 13.5362 11.0445 13.177 10.803 12.9155C10.5499 12.6413 10.214 12.5146 9.85954 12.5596Z" fill="#080B12"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_3114_663">
+                        <rect width="20" height="20" fill="white"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                    <p>
+                        O item <strong><span class="removed"></span></strong> foi removido da sua lista
+                    </p>
                 
-                <p><span>O item foi removido da lista</span></p>
-
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.46967 4.46967C4.76256 4.17678 5.23744 4.17678 5.53033 4.46967L10 8.93934L14.4697 4.46967C14.7626 4.17678 15.2374 4.17678 15.5303 4.46967C15.8232 4.76256 15.8232 5.23744 15.5303 5.53033L11.0607 10L15.5303 14.4697C15.8232 14.7626 15.8232 15.2374 15.5303 15.5303C15.2374 15.8232 14.7626 15.8232 14.4697 15.5303L10 11.0607L5.53033 15.5303C5.23744 15.8232 4.76256 15.8232 4.46967 15.5303C4.17678 15.2374 4.17678 14.7626 4.46967 14.4697L8.93934 10L4.46967 5.53033C4.17678 5.23744 4.17678 4.76256 4.46967 4.46967Z" fill="#080B12"/>
-                </svg>
+                    <svg class="exit" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" id="close-icon">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.46967 4.46967C4.76256 4.17678 5.23744 4.17678 5.53033 4.46967L10 8.93934L14.4697 4.46967C14.7626 4.17678 15.2374 4.17678 15.5303 4.46967C15.8232 4.76256 15.8232 5.23744 15.5303 5.53033L11.0607 10L15.5303 14.4697C15.8232 14.7626 15.8232 15.2374 15.5303 15.5303C15.2374 15.8232 14.7626 15.8232 14.4697 15.5303L10 11.0607L5.53033 15.5303C5.23744 15.8232 4.76256 15.8232 4.46967 15.5303C4.17678 15.2374 4.17678 14.7626 4.46967 14.4697L8.93934 10L4.46967 5.53033C4.17678 5.23744 4.17678 4.76256 4.46967 4.46967Z" fill="#080B12"/>
+                    </svg>
+                </div>
             </div>
         </footer>
     </div>
-</body>
 
-<script src="./script.js"></script>
+    <script src="scripts.js"></script>
+</body>
 
 </html>
