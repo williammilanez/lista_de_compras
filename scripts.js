@@ -62,6 +62,7 @@ function addItem(name) {
 
     // <img>
     const new_remove_img = document.createElement("img")
+    new_remove_img.classList.add("trash-bin")
     new_remove_img.setAttribute("src", "./assets/trash-bin.svg")
     new_remove_img.setAttribute("alt", "Ícone de lata de lixo")
     new_item.append(new_remove_img)
@@ -69,7 +70,6 @@ function addItem(name) {
     // tornar o ícone da lixeira do novo item capaz de chamar a função deleteEvent() quando clicado
     deleteEvent(new_remove_img)
     
-
     // insira o novo <li class="item"> na <ul role="list" id="items-list"> na primeira posição
     items_list.prepend(new_item)
 }
@@ -82,23 +82,28 @@ all_remove_icons.forEach((selected_element) => {
 // remover item da lista (ul#items-list) quando clicado, somente no respectivo ícone da lixeira
 function deleteEvent(selected_element) {
     selected_element.addEventListener("click", (event) => {
-        const warning_box = document.getElementById("warning-wrapper")
-        const warning_message = warning_box.querySelector("p")
-        const removed_item = event.target.closest("li.item")
-        const close_icon = document.getElementById("close-icon")
+        const warning_box = document.getElementById("warning-wrapper");
+        const warning_message = warning_box.querySelector("p");
+        const removed_item = event.target.closest("li.item");
+        const close_icon = document.getElementById("close-icon");
 
         // exibe o nome do item na mensagem de aviso
-        warning_message.querySelector("span.removed").textContent = removed_item.querySelector("span").textContent
+        warning_message.querySelector("span.removed").textContent = removed_item.querySelector("span").textContent;
 
         // exibe mensagem de aviso completa após a remoção do item
-        warning_box.classList.remove("hidden")
+        warning_box.classList.remove("hidden");
 
-        // remove-o da lista
-        removed_item.remove()
+        // remove o item da lista
+        removed_item.remove();
 
-        // fecha a mensagem de aviso, somente quando clicado no ícone "X"
+        // faz a mensagem sumir automaticamente após 5 segundos
+        setTimeout(() => {
+            warning_box.classList.add("hidden");
+        }, 5000);
+
+        // fecha a mensagem de aviso quando clicado no "X"
         close_icon.addEventListener("click", () => {
-            warning_box.classList.add("hidden")
-        })
-    })
+            warning_box.classList.add("hidden");
+        });
+    });
 }

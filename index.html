@@ -44,8 +44,8 @@
 
             <form id="add-item-form">
                 <div class="add-item">
-                    <input id="new-item" type="text" name="new-item" placeholder="Adicione um novo item">
-                    <p class="hidden">* Campo obrigatório!</p>
+                    <input id="new-item" type="text" name="new-item" placeholder="Adicione um novo item" maxlength="20" required />
+                    <p class="hidden"></p>
                     <button type="submit">Adicionar item</button>
                 </div>
             </form>
@@ -103,7 +103,7 @@
                         </defs>
                     </svg>
                     <p>
-                        O item <strong><span class="removed"></span></strong> foi removido da sua lista
+                        O item<strong>&nbsp;<span class="removed"></span>&nbsp;</strong> foi removido da sua lista!
                     </p>
                 
                     <svg class="exit" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" id="close-icon">
