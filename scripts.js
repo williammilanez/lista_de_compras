@@ -46,6 +46,18 @@ form.onsubmit = (event) => {
 
 // inserir novo item no topo da lista
 function addItem(name) {
+    // normaliza o nome (remove espaços extras e converte para minúsculas para evitar duplicatas com diferenças de caixa)
+    const formattedName = name.trim().toLowerCase();
+
+    // verifica se já existe um item com o mesmo nome na lista
+    const existingItems = document.querySelectorAll("li.item span");
+    for (const item of existingItems) {
+        if (item.textContent.trim().toLowerCase() === formattedName) {
+            alert("Este item já consta na listagem!");
+            return; // impede a adição do item duplicado
+        }
+    }
+
     // criar <li class="item">
     const new_item = document.createElement("li");
     new_item.classList.add("item");
@@ -55,9 +67,9 @@ function addItem(name) {
     new_checkbox.setAttribute("type", "checkbox");
     new_item.append(new_checkbox);
 
-    // criar <span> user_input.value </span>
+    // criar <span> com o nome formatado
     const new_name = document.createElement("span");
-    new_name.textContent = name;
+    new_name.textContent = name.trim(); // Mantém a formatação original para exibição
     new_item.append(new_name);
 
     // criar <img> (inicialmente escondida)
@@ -65,7 +77,7 @@ function addItem(name) {
     new_remove_img.classList.add("trash-bin");
     new_remove_img.setAttribute("src", "./assets/trash-bin.svg");
     new_remove_img.setAttribute("alt", "Ícone de lata de lixo");
-    new_remove_img.style.display = "none"; // esconder a lixeira inicialmente
+    new_remove_img.style.display = "none"; // Esconder a lixeira inicialmente
     new_item.append(new_remove_img);
 
     // tornar o ícone da lixeira do novo item capaz de chamar a função deleteEvent()
@@ -79,6 +91,7 @@ function addItem(name) {
     // inserir o novo <li class="item"> na lista
     items_list.prepend(new_item);
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     // seleciona todos os itens já cadastrados
@@ -111,8 +124,14 @@ function deleteEvent(selected_element) {
         const removed_item = event.target.closest("li.item");
         const close_icon = document.getElementById("close-icon");
 
-        // exibe o nome do item na mensagem de aviso
-        warning_message.querySelector("span.removed").textContent = removed_item.querySelector("span").textContent;
+        // verifica se a largura da tela é menor ou igual a 640px
+        if (window.matchMedia("(max-width: 640px)").matches) {
+            warning_message.textContent = "Item removido com sucesso!";
+        } else {
+            // exibe o nome do item na mensagem de aviso
+            warning_message.innerHTML = `O item<strong>&nbsp;<span class="removed"></span>&nbsp;</strong> foi removido da sua lista!`;
+            warning_message.querySelector("span.removed").textContent = removed_item.querySelector("span").textContent;
+        }
 
         // exibe mensagem de aviso completa após a remoção do item
         warning_box.classList.remove("hidden");
@@ -121,9 +140,9 @@ function deleteEvent(selected_element) {
         removed_item.remove();
 
         // faz a mensagem sumir automaticamente após 5 segundos
-        // setTimeout(() => {
-        //     warning_box.classList.add("hidden");
-        // }, 5000);
+        setTimeout(() => {
+            warning_box.classList.add("hidden");
+        }, 5000);
 
         // fecha a mensagem de aviso quando clicado no "X"
         close_icon.addEventListener("click", () => {
@@ -131,19 +150,3 @@ function deleteEvent(selected_element) {
         });
     });
 }
-
-// altera o texto de mensagem removida para versão mobile
-function updateWarningMessage() {
-    const warningMessage = document.querySelector("#warning-wrapper p");
-    if (window.matchMedia("(max-width: 390px)").matches) {
-        warningMessage.innerHTML = `<strong>&nbsp;<span class="removed"></span>&nbsp;</strong> removido!`;
-    } else {
-        warningMessage.innerHTML = `O item<strong>&nbsp;<span class="removed"></span>&nbsp;</strong> foi removido da sua lista!`;
-    }
-}
-
-// chama a função ao carregar a página
-document.addEventListener("DOMContentLoaded", updateWarningMessage);
-
-// chama a função quando a tela for redimensionada (para garantir adaptação dinâmica)
-window.addEventListener("resize", updateWarningMessage);

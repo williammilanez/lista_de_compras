@@ -319,7 +319,7 @@ button:hover {
 }
 
     /* versão mobile para 390px ou menos */
-@media (max-width: 390px) {
+@media (max-width: 640px) {
     .logo {
         display: none; /* esconde a logo no header */
     }
